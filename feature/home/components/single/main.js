@@ -14,7 +14,7 @@ const Main = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff", 
+    backgroundColor: "#fff",
     width: "100%",
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,

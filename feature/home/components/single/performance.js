@@ -4,12 +4,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 
 const performanceData = [
-  { id: "1", label: "Horsepower", value: "320 HP", icon: "speedometer" },
-  { id: "2", label: "Torque", value: "400 Nm", icon: "cog" },
-  { id: "3", label: "0-100 km/h", value: "4.5 sec", icon: "timer" },
-  { id: "4", label: "Top Speed", value: "250 km/h", icon: "rocket" },
-  { id: "5", label: "Fuel", value: "12 km/L", icon: "water" },
+  { id: "1", label: "Хүч", value: "320 HP", icon: "speedometer" },
+  { id: "2", label: "Араа", value: "Автомат", icon: "cog" },
+  { id: "3", label: "Суудал", value: "5", icon: "bed" },
+  { id: "4", label: "Өнгө", value: "Хар", icon: "color-palette" },
+  { id: "5", label: "Fuel", value: "70 литр", icon: "water" },
   { id: "6", label: "Trans", value: "8-speed", icon: "settings" },
+  { id: "7", label: "Замын хязгаар", value: "400км", icon: "car" },
 ];
 
 const Performance = () => {
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   value: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#fff",
     marginVertical: 8,

@@ -14,7 +14,7 @@ const Price = () => {
           onPress={() => navigation.navigate("Order")}
           activeOpacity={0.7}
         >
-          <Text style={styles.buttonText}>Book Now</Text>
+          <Text style={styles.buttonText}>Захиалах</Text>
         </TouchableOpacity>
       </LinearGradient>
     </View>
@@ -23,18 +23,18 @@ const Price = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingHorizontal: 10,
+    paddingBottom: 10,
     alignItems: "center",
   },
   button: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 20,
+    padding: 10,
     borderRadius: 50,
     width: "95%",
-    backgroundColor: "rgba(255,255,255,0.1)", // Glassy effect
+    backgroundColor: "rgba(255,255,255,0.1)", 
     shadowColor: "#FF6B6B",
     shadowOffset: { width: 0, height: -10 },
     shadowOpacity: 0.4,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     elevation: 15,
   },
   price: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "900",
     color: "#fff",
     paddingLeft: 10,
