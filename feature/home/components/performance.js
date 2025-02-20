@@ -1,31 +1,31 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import SvgScroll from "../../../assets/scroll-up-down-svgrepo-com.svg";
+import { LinearGradient } from "expo-linear-gradient";
+import { Ionicons } from "@expo/vector-icons";
 
 const performanceData = [
-  { id: "1", label: "Horsepower", value: "320 HP" },
-  { id: "2", label: "Torque", value: "400 Nm" },
-  { id: "3", label: "0-100 km/h", value: "4.5 sec" },
-  { id: "4", label: "Top Speed", value: "250 km/h" },
-  { id: "5", label: "Fuel Efficiency", value: "12 km/L" },
-  { id: "6", label: "Transmission", value: "8-speed Automatic" },
+  { id: "1", label: "Horsepower", value: "320 HP", icon: "speedometer" },
+  { id: "2", label: "Torque", value: "400 Nm", icon: "cog" },
+  { id: "3", label: "0-100 km/h", value: "4.5 sec", icon: "timer" },
+  { id: "4", label: "Top Speed", value: "250 km/h", icon: "rocket" },
+  { id: "5", label: "Fuel", value: "12 km/L", icon: "water" },
+  { id: "6", label: "Trans", value: "8-speed", icon: "settings" },
 ];
 
 const Performance = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer} >
-        <Text style={styles.header}>Үзүүлэлт</Text>
-        {/* <SvgScroll width={30} height={30} /> */}
-      </View>
+      <Text style={styles.header}>Performance</Text>
       <FlatList
         data={performanceData}
         keyExtractor={(item) => item.id}
         horizontal
+        showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
-          <View style={styles.card} >
-            <Text style={styles.label}>{item.label}</Text>
+          <View style={styles.card}>
+            <Ionicons name={item.icon} size={26} color="#FF6B6B" />
             <Text style={styles.value}>{item.value}</Text>
+            <Text style={styles.label}>{item.label}</Text>
           </View>
         )}
       />
@@ -36,42 +36,40 @@ const Performance = () => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
-    marginVertical: 10,
-    height: 200,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    marginVertical: 15,
   },
   header: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#333",
-    marginBottom: 10,
+    fontSize: 28,
+    fontWeight: "800",
+    color: "#000",
+    marginBottom: 20,
   },
   card: {
-    backgroundColor: "#fff",
-    padding: 15,
-    marginHorizontal: 8,
-    borderRadius: 10,
-    shadowColor: "#090492",
-    shadowOffset: { width: 0, height: 2 },
+    padding: 20,
+    marginRight: 15,
+    borderRadius: 20,
+    width: 120,
+    height: 140,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#252525", 
+    shadowColor: "#000",
+    shadowOffset: { width: 5, height: 5 },
     shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 2,
-    width: 150,
-    height: 120,
+    shadowRadius: 10,
+    elevation: 8,
   },
   label: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "600",
-    color: "#555",
+    color: "#B0B0B0",
+    textAlign: "center",
   },
   value: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
-    color: "#222",
+    color: "#fff",
+    marginVertical: 8,
   },
 });
 

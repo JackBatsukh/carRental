@@ -11,7 +11,7 @@ export default function LoginScreen() {
   const handleLogin = () => {
     if (email === "123@gmail.com" && password === "123") {
       Alert.alert("Амжилттай", "Та амжилттай нэвтэрлээ!");
-      navigation.navigate("Home"); // Home руу шилжих
+      navigation.navigate("GetStarted"); // Changed to GetStarted instead of Home
     } else {
       Alert.alert("Алдаа", "Нэвтрэх мэдээлэл буруу байна!");
     }

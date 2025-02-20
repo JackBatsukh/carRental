@@ -1,53 +1,67 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-const PriceOrder = () => {
+import { LinearGradient } from "expo-linear-gradient";
+
+const Price = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <View style={styles.priceContainer}>
-        <Text style={styles.price}>150000₮</Text>
-      </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Order")}
-        activeOpacity={0.4}>
-        <Text style={styles.buttonText}>Захиалах</Text>
-      </TouchableOpacity>
+      <LinearGradient colors={["#FF6B6B", "#FF8E53"]} style={styles.button}>
+        <Text style={styles.price}>150,000₮</Text>
+        <TouchableOpacity
+          style={styles.orderButton}
+          onPress={() => navigation.navigate("Order")}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.buttonText}>Book Now</Text>
+        </TouchableOpacity>
+      </LinearGradient>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    alignItems: "center",
+  },
+  button: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 20,
-    marginVertical: 20,
-    position: "absolute",
-    bottom: 10,
-    width: "100%",
-  },
-  priceContainer: {
-    flex: 1,
+    padding: 20,
+    borderRadius: 50,
+    width: "95%",
+    backgroundColor: "rgba(255,255,255,0.1)", // Glassy effect
+    shadowColor: "#FF6B6B",
+    shadowOffset: { width: 0, height: -10 },
+    shadowOpacity: 0.4,
+    shadowRadius: 20,
+    elevation: 15,
   },
   price: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#030303",
+    fontSize: 28,
+    fontWeight: "900",
+    color: "#fff",
+    paddingLeft: 10,
   },
-  button: {
-    backgroundColor: "#030303",
-    paddingVertical: 15,
+  orderButton: {
+    backgroundColor: "rgba(255,255,255,0.95)",
+    paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 25,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
   },
   buttonText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 16,
+    color: "#FF6B6B",
+    fontWeight: "800",
+    fontSize: 18,
   },
 });
 
-export default PriceOrder;
+export default Price;

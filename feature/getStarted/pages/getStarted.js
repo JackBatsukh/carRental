@@ -37,7 +37,7 @@ export default function GetStarted() {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              navigation.push("Home");
+              navigation.navigate("MainTabs"); // Changed from Home to MainTabs
             }}
           >
             <Text style={styles.buttonText}>Get Started</Text>
@@ -69,14 +69,6 @@ const styles = StyleSheet.create({
     top: -20,
     alignItems: "center",
     width: "100%",
-  },
-  text: {
-    color: "black",
-    fontSize: 24,
-    fontFamily: "Inter",
-    fontWeight: "bold",
-    textAlign: "flex-start",
-    marginBottom: 5,
   },
   button: {
     padding: 15,

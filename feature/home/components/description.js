@@ -4,10 +4,11 @@ import { View, Text, StyleSheet } from "react-native";
 const Description = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> Тайлбар</Text>
+      <Text style={styles.title}>Description</Text>
       <Text style={styles.text}>
-       lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, repellat 
-       lorem lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, repellat      
+        Experience luxury and power with the Toyota Land Cruiser 200. Perfect
+        for both city drives and off-road adventures, this SUV combines
+        cutting-edge technology with unparalleled comfort.
       </Text>
     </View>
   );
@@ -16,17 +17,19 @@ const Description = () => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
-    marginVertical: 10,
+    marginVertical: 15,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#333",
+    fontSize: 28,
+    fontWeight: "800",
+    color: "#000",
+    marginBottom: 15,
   },
   text: {
     fontSize: 16,
-    color: "#666",
-    lineHeight: 24,
+    color: "#000",
+    lineHeight: 26,
+    fontWeight: "400",
   },
 });
 
