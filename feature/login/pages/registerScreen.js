@@ -2,26 +2,46 @@ import React, { useState } from "react";
 import { View, StyleSheet, Alert } from "react-native";
 import { TextInput, Button, Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
+import api from "../../api/api";
+
 export default function RegisterScreen() {
   const navigation = useNavigation();
   const [name, setName] = useState("");
+  const [first, setFirst] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
 
-  const handleRegister = () => {
-    if (name && email && password) {
-      Alert.alert("Амжилттай", "Бүртгэл амжилттай үүслээ!");
-      navigation.navigate("Login"); // Login Page руу буцах
-    } else {
-      Alert.alert("Алдаа", "Бүх талбарыг бөглөнө үү!");
+  const handleRegister = async () => {
+    try {
+      await api.post("/user/signup", {
+        firstName: name.split(" ")[0],
+        lastName: first,
+        email,
+        password,
+        phone,
+      });
+      Alert.alert("Бүртгэл амжилттай үүслээ!", response.data.message);
+      navigation.navigate("Login");
+    } catch (error) {
+      Alert.alert(
+        "Алдаа",
+        error.response?.data?.message 
+        || "Бүртгүүлэхэд алдаа гарлаа",
+        console.log(error)
+      );
     }
   };
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Бүртгүүлэх</Text>
+      <TextInput
+        label="Овог"
+        value={first}
+        onChangeText={setFirst}
+        style={styles.input}
+        mode="outlined"
+      />
       <TextInput
         label="Нэр"
         value={name}
@@ -44,6 +64,14 @@ export default function RegisterScreen() {
         mode="outlined"
         secureTextEntry
       />
+      <TextInput
+        label="Утас"
+        value={phone}
+        onChangeText={setPhone}
+        style={styles.input}
+        mode="outlined"
+      />
+
       <Button mode="contained" onPress={handleRegister} style={styles.button}>
         Бүртгүүлэх
       </Button>

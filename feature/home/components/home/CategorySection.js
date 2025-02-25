@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 const CategorySection = ({ categories }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Categories</Text>
+      <Text style={styles.title}>Машины төрөл</Text>
       <View style={styles.categoriesContainer}>
         {categories.map((category) => (
           <TouchableOpacity key={category.id} style={styles.categoryCard}>
@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
     paddingHorizontal: 15,
-    backgroundColor: "#121212",
   },
   title: {
     fontSize: 18,

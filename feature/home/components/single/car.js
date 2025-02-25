@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+import api from "../../../api/api";
 
 const Car = ({ car }) => {
   const navigation = useNavigation();
+  const [carData, setCarData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCarData = async () => {
+      try {
+        setLoading(true);
+        const response = await api.get(`/cars/${car.carID || car.id}`);
+        setCarData(response.data.car);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching car data:", err);
+        setError("Failed to load car data");
+        setCarData(car);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (car?.carID || car?.id) {
+      fetchCarData();
+    } else {
+      setCarData(car);
+      setLoading(false);
+    }
+  }, [car]);
 
   return (
     <View style={styles.container}>
@@ -29,8 +57,8 @@ const Car = ({ car }) => {
         <Ionicons name="chevron-back" size={28} color="#fff" />
       </TouchableOpacity>
       <View style={styles.carInfo}>
-        <Text style={styles.carName}>{car?.name || "Unknown Car"}</Text>
-        <Text style={styles.carCategory}>{car?.category || "Unknown"}</Text>
+        <Text style={styles.carName}>{carData?.brandName || "Unknown Car"}</Text>
+        <Text style={styles.carCategory}>{carData?.modelName || "Unknown"}</Text>
       </View>
     </View>
   );

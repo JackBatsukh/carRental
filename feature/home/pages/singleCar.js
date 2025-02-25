@@ -10,6 +10,7 @@ import { useRoute } from "@react-navigation/native";
 const SingleCar = () => {
   const route = useRoute();
   const car = route.params?.car;
+  // console.log("Single car:", car);
 
   return (
     <SafeAreaView style={styles.container}>

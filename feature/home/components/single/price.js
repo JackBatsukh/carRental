@@ -1,14 +1,16 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const Price = () => {
+const Price = ({ car }) => {
+
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#FF6B6B", "#FF8E53"]} style={styles.button}>
-        <Text style={styles.price}>150,000₮</Text>
+        <Text style={styles.price}>{car?.price || "N/A"}</Text>
         <TouchableOpacity
           style={styles.orderButton}
           onPress={() => navigation.navigate("Order")}
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 50,
     width: "95%",
-    backgroundColor: "rgba(255,255,255,0.1)", 
+    backgroundColor: "rgba(255,255,255,0.1)",
     shadowColor: "#FF6B6B",
     shadowOffset: { width: 0, height: -10 },
     shadowOpacity: 0.4,

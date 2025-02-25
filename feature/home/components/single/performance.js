@@ -1,22 +1,101 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
+import api from "../../../api/api"; 
 
-const performanceData = [
-  { id: "1", label: "Хүч", value: "320 HP", icon: "speedometer" },
-  { id: "2", label: "Араа", value: "Автомат", icon: "cog" },
-  { id: "3", label: "Суудал", value: "5", icon: "bed" },
-  { id: "4", label: "Өнгө", value: "Хар", icon: "color-palette" },
-  { id: "5", label: "Fuel", value: "70 литр", icon: "water" },
-  { id: "6", label: "Trans", value: "8-speed", icon: "settings" },
-  { id: "7", label: "Замын хязгаар", value: "400км", icon: "car" },
-];
+const Performance = ({ car }) => {
+  const [carData, setCarData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-const Performance = () => {
+  useEffect(() => {
+    const fetchCarData = async () => {
+      try {
+        setLoading(true);
+        const response = await api.get(`/cars/${car.carID || car.id}`);
+        setCarData(response.data.car); 
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching car data:", err);
+        setError("Failed to load car data");
+        setCarData(car);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (car?.carID || car?.id) {
+      fetchCarData();
+    } else {
+      setCarData(car);
+      setLoading(false);
+    }
+  }, [car]);
+
+  const performanceData = [
+    {
+      id: "1",
+      icon: "speedometer",
+      value: carData?.engine || "N/A",
+      label: "Хөдөлгүүр",
+    },
+    {
+      id: "2",
+      icon: "people",
+      value: carData?.seats || "N/A",
+      label: "Суудал",
+    },
+    {
+      id: "3",
+      icon: "speedometer-outline",
+      value: carData?.roadLimit || "N/A",
+      label: "Замын хязгаар",
+    },
+    {
+      id: "4",
+      icon: "water",
+      value: carData?.fuelCapacity || "N/A",
+      label: "Түлшний багтаамж",
+    },
+    {
+      id: "5",
+      icon: "color-palette",
+      value: carData?.color || "N/A",
+      label: "Өнгө",
+    },
+    {
+      id: "6",
+      icon: "car",
+      value: carData?.type || "N/A",
+      label: "Араа",
+    },
+    {
+      id: "7",
+      icon: "card",
+      value: carData?.price || "N/A",
+      label: "үнэ",
+    },
+  ];
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>Уншиж байна...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>Алдаа: {error}</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Performance</Text>
+      <Text style={styles.header}>Гүйцэтгэл</Text>
       <FlatList
         data={performanceData}
         keyExtractor={(item) => item.id}
@@ -42,7 +121,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 28,
     fontWeight: "800",
-    color: "#000",
+    color: "#fff",
     marginBottom: 20,
   },
   card: {
@@ -53,7 +132,7 @@ const styles = StyleSheet.create({
     height: 140,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#252525", 
+    backgroundColor: "#252525",
     shadowColor: "#000",
     shadowOffset: { width: 5, height: 5 },
     shadowOpacity: 0.2,

@@ -2,18 +2,32 @@ import React, { useState } from "react";
 import { View, StyleSheet, Alert } from "react-native";
 import { TextInput, Button, Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import api from "../../api/api"; 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    if (email === "123@gmail.com" && password === "123") {
-      Alert.alert("Амжилттай", "Та амжилттай нэвтэрлээ!");
-      navigation.navigate("GetStarted"); // Changed to GetStarted instead of Home
-    } else {
-      Alert.alert("Алдаа", "Нэвтрэх мэдээлэл буруу байна!");
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert("Алдаа", "Имэйл болон нууц үгээ оруулна уу!");
+      return;
+    }
+
+    try {
+      const response = await api.post("/user/login", { email, password });
+      const { token } = response.data;
+      await AsyncStorage.setItem("token", token);
+      Alert.alert("Амжилттай", response.data.message);
+      navigation.navigate("GetStarted");
+    } catch (error) {
+      Alert.alert(
+        "Алдаа",
+        error.response?.data?.message || "Нэвтрэхэд алдаа гарлаа"
+      );
+      console.log("Login error:", error.response?.data || error);
     }
   };
 
@@ -26,6 +40,7 @@ export default function LoginScreen() {
         onChangeText={setEmail}
         style={styles.input}
         mode="outlined"
+        autoCapitalize="none" 
       />
       <TextInput
         label="Нууц үг"
@@ -35,7 +50,11 @@ export default function LoginScreen() {
         mode="outlined"
         secureTextEntry
       />
-      <Button mode="contained" onPress={handleLogin} style={styles.button}>
+      <Button
+        mode="contained-tonal"
+        onPress={handleLogin}
+        style={styles.button}
+      >
         Нэвтрэх
       </Button>
       <Button

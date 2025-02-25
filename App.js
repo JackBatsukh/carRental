@@ -11,6 +11,10 @@ import Profile from "./feature/profile/pages/profile";
 import { Ionicons } from "@expo/vector-icons";
 import Home from "./feature/home/pages/home";
 import SingleCar from "./feature/home/pages/singleCar";
+import Informarion from "./feature/profile/components/information";
+import RentHistory from "./feature/profile/components/rentHistory";
+import ResetPassword from "./feature/profile/components/resetPassword"
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -86,7 +90,6 @@ function MainStack() {
   return (
     <Stack.Navigator
       initialRouteName="Login"
-      // initialRouteName="Home"
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Login" component={Login} />
@@ -94,8 +97,11 @@ function MainStack() {
       <Stack.Screen name="GetStarted" component={GetStarted} />
       <Stack.Screen name="MainTabs" component={MainTabs} />
       <Stack.Screen name="SingleCar" component={SingleCar} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Information" component={Informarion} />
+      <Stack.Screen name="RentHistory" component={RentHistory} />
+      <Stack.Screen name="ResetPassword" component={ResetPassword} />
       <Stack.Screen name="Order" component={Order} />
-
     </Stack.Navigator>
   );
 }
